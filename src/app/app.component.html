@@ -1,0 +1,54 @@
+<header>
+  <div class="left">
+    <a href="http://public.sud.uz/#!/sign/view"><img src="assets/gerb.png" height="72"></a>
+    <p align="center">
+      <b >{{topTitle}}</b> <br/>
+      <b >{{bottomTitle}}</b>
+    </p>
+  </div>
+  <div class="right">
+    <mat-toolbar>
+
+      <button mat-button *ngIf="isLoggedIn()" style="margin-right:10px">
+        <mat-icon >person</mat-icon>
+        <span>{{username()}}</span>
+      </button>
+
+      <mat-menu #appMenu="matMenu">
+
+        <button mat-menu-item (click)="languageChanged()">
+          <mat-icon [ngStyle]="{color: languageRu ? 'red' : 'green'}" >language</mat-icon>
+          <span>{{language}}</span>
+        </button>
+        <button mat-menu-item routerLink="/charts">
+          <mat-icon>trending_up</mat-icon>
+          <span>Статистика</span>
+        </button>
+        <button mat-menu-item *ngIf="!isLoggedIn(); else loggedOut" (click)="openLoginDialog()">
+          <mat-icon>account_circle</mat-icon>
+          <span>{{loginTitle}}</span>
+        </button>
+        <ng-template #loggedOut>
+          <button  mat-menu-item  (click)="logout()">
+            <mat-icon>account_circle</mat-icon>
+            <span>{{logoutTitle}}</span>
+          </button>
+        </ng-template>
+
+      </mat-menu>
+
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+</header>
+
+<section>
+  <div class="section">
+    <p><img src="assets/flag.png" alt="#"></p>
+    <p >{{headerTitle}}</p>
+  </div>
+</section>
+
+<router-outlet ></router-outlet>

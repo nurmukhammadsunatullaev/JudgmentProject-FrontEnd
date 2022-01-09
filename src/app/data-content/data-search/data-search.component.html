@@ -1,0 +1,68 @@
+<mat-dialog-content>
+<form [formGroup]="searchForm">
+  <div class="full-with-field">
+    <div class="part-with-items">
+      <mat-form-field>
+        <input [formControlName]="'fromDate'" matInput [matDatepicker]="fromDate" placeholder="Бошланиши" required>
+        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="part-with-items">
+      <mat-form-field>
+        <input [formControlName]="'toDate'" matInput [matDatepicker]="toDate" placeholder="Тугаши" required>
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <div class="full-with-field">
+    <div class="part-with-items">
+      <mat-form-field>
+        <mat-label>Вилоятни танланг</mat-label>
+        <mat-select [formControlName]="'regionId'" #region (valueChange)="updateAttributes('regions',$event)" required>
+          <mat-option *ngFor="let region of regions" [value]="region.attributeId">{{region.attributeName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="part-with-items">
+      <mat-form-field>
+        <mat-label>Судни танланг</mat-label>
+        <mat-select #court  [formControlName]="'courtId'" required>
+          <mat-option *ngFor="let court of courts" [value]="court.attributeId">{{court.attributeName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="full-with-field">
+    <div class="part-with-items">
+      <mat-form-field>
+        <mat-label>Иш категориясини танланг</mat-label>
+        <mat-select [formControlName]="'categoryId'" #category (valueChange)="updateAttributes('categories',$event)">
+          <mat-option *ngFor="let category of categories" [value]="category.attributeId">{{category.attributeName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="part-with-items">
+      <mat-form-field>
+        <mat-label>Иш туркумини танланг</mat-label>
+        <mat-select [formControlName]="'requirementId'" #requirement required>
+          <mat-option *ngFor="let requirement of requirements" [value]="requirement.attributeId">{{requirement.attributeName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="close()">Бекор килиш</button>
+  <button mat-raised-button (click)="closeDialog()" [disabled]="!searchForm.valid">Кидириш</button>
+</mat-dialog-actions>

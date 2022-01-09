@@ -1,0 +1,9 @@
+.full-with-field {
+  width: 100%;
+}
+
+.part-with-items{
+  width: 50%;
+  float: left;
+  display: inline-block;
+}

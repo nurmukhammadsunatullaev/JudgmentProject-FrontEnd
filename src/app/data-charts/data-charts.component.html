@@ -1,0 +1,15 @@
+<div style="margin-left: 4em">
+  <mat-form-field >
+    <mat-label>Вилоятни танланг</mat-label>
+    <mat-select #region [(value)]="regionId" (valueChange)="regionSelected()" required>
+      <mat-option *ngFor="let region of attributes" [value]="region.attributeId" >{{region.attributeName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-grid-list cols="2" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let url of urls">
+    <app-data-chart [typeUrl]="url" [chartType]="'pie'"></app-data-chart>
+  </mat-grid-tile>
+</mat-grid-list>
+
